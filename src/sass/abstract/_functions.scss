@@ -1,0 +1,28 @@
+// Transitions
+@mixin easeTransition($property, $time, $transition){
+    transition: $property $time $transition;
+    -webkit-transition: $property $time $transition;
+    -moz-transition: $property $time $transition;
+    -ms-transition: $property $time $transition;
+    -o-transition: $property $time $transition;
+}
+
+// Borders
+@mixin borderRadius($border) {
+    border-radius: $border;
+    -webkit-border-radius: $border;
+    -moz-border-radius: $border;
+    -ms-border-radius: $border;
+    -o-border-radius: $border;
+}
+
+// Displays
+@mixin flex($gap) {
+    display: flex;
+    gap: $gap;
+}
+
+@mixin flexCenter {
+    justify-content: center;
+    align-items: center;
+}

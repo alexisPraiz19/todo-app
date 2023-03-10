@@ -1,0 +1,9 @@
+// Abstracts
+@import "./abstract/_variables";
+@import "./abstract/_functions";
+@import "./abstract/_general";
+
+// Components styles
+@import "./styles/main";
+@import "./styles/header";
+@import "./styles/todoList";

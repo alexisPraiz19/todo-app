@@ -1,0 +1,75 @@
+// Styles desktop <= 1440px;
+.header{
+    // General styles
+    width: 100%;
+    height: max-content;
+    
+    // Light - Dark theme
+    .top-content{
+        @include flex(0);
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+
+        .title{ 
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            color: var(--title-todo);
+        }
+
+        .switch-theme{
+            width: 28px;
+            height: 28px;
+            background-image: url("./assets/images/icon-sun.svg");
+            background-size: 100%;
+            cursor: pointer;
+        }
+    }
+    
+    // Add todo
+    .container-add{
+        width: 100%;
+        height: 50px;
+        padding: 0 20px;
+        @include flex(15px);
+        align-items: center;
+        background-color: var(--bg-todo-container);
+        @include borderRadius(5px);
+
+        .label-input_add{
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--border-circle);
+            @include borderRadius(50%);
+            cursor: pointer;
+        }
+
+        .input-add_todo{
+            flex: 1;
+            height: 100%;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 14.5px;
+            color: var(--placeholder);
+            letter-spacing: .5px;
+
+            &::placeholder{
+                font-family: "Josefin Sans";
+                font-size: 14px;
+                letter-spacing: .5px;
+                color: var(--placeholder);
+            }
+        }
+    }
+}
+
+// Light theme
+body.light{
+    .header{
+        .switch-theme{
+            background-image: url("./assets/images/icon-moon.svg");
+        }
+    }
+}

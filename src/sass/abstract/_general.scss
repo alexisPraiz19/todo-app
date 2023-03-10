@@ -1,0 +1,74 @@
+// Fuente de textos
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Dark theme
+:root{
+    // neutral 
+    --title-todo: hsl(236, 33%, 92%);
+    --placeholder: hsl(236, 9%, 61%);
+    --border-circle: hsl(233, 14%, 35%);
+    --border-bottom-item: hsl(235, 19%, 35%);
+    --border-circle-hover: linear-gradient(hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+
+    // dark
+    --bg-body: hsl(235, 21%, 11%);
+    --bg-todo-container: hsl(235, 24%, 19%);
+    --todo-text: hsl(236, 9%, 61%);
+    --completed-todo: hsl(233, 14%, 35%);
+}
+
+body{
+    position: relative;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: var(--bg-body);
+    @include easeTransition(all, .1s, ease);
+
+    .bg-desktop{
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 250px;
+        background-image: url("./assets/images/bg-desktop-dark.jpg");
+        background-size: 100%;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+}
+
+#root{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+// Light theme
+body.light{
+    --bg-body: hsl(0, 0%, 98%);
+
+    .bg-desktop{
+        background-image: url("./assets/images/bg-desktop-light.jpg");
+    }
+}
+
+// Responsive 
+@media screen and (max-width: 480px){
+    // Dark theme mobile
+    body{
+        .bg-desktop{ background-image: url("./assets/images/bg-mobile-dark.jpg"); }
+    }
+    
+    // Light theme mobile
+    body.light{
+        .bg-desktop{ background-image: url("./assets/images/bg-desktop-light.jpg"); }
+    }
+}
