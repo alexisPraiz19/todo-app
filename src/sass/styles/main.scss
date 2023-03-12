@@ -2,6 +2,7 @@
     width: 500px;
     height: max-content;
     min-height: 480px;
+    max-height: 480px;
     @include borderRadius(10px);
 }
 
