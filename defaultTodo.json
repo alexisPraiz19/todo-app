@@ -1,0 +1,34 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "do": "Complete online JavaScript Course",
+            "complete": false
+        },
+        {
+            "id": 2,
+            "do": "Job around the park 3x",
+            "complete": false
+        },
+        {
+            "id": 3,
+            "do": "10 minutes meditation",
+            "complete": false
+        },
+        {
+            "id": 4,
+            "do": "Read for 1 hour",
+            "complete": false
+        },
+        {
+            "id": 5,
+            "do": "Pick up groceries",
+            "complete": false
+        },
+        {
+            "id": 6,
+            "do": "Complete Todo App on Frontend Mentor",
+            "complete": false
+        }
+    ]
+}
