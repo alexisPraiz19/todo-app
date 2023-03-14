@@ -1,0 +1,70 @@
+// Styles desktop <= 1440px
+.buttons-container{
+    // General styles
+    position: absolute;
+    width: 500px;
+    height: 40px;
+    padding: 0 18px;
+    @include flex(0);
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-todo-container);
+    color: var(--buttons-select);
+    font-size: 13px;
+    @include borderRadiusDisable(0, 0, 10px, 10px);
+    border-top: 1px solid var(--border-top-item);
+    
+    // Buttons styles
+    .select-btns{
+        margin-left: 30px;
+        
+        .select-btn{ 
+            font-weight: 700;
+            padding: 0 5px;
+            letter-spacing: .5px;
+        }
+    }
+
+    .select-btn{
+        color: var(--buttons-select);
+        background-color: transparent;
+        border: none;
+        font-family: "Josefin Sans";
+        font-size: 13px;
+        &:hover{
+            cursor: pointer;
+            color: var(--buttons-select-hover);
+        }
+    }
+
+    .selected{color: var(--button-selected-active) }
+}
+
+// Styles mobile <= 480px
+@media screen and (max-width: 480px){
+    .buttons-container{
+        width: 90vw;
+        height: 50px;
+        margin-top: 30px;
+        font-size: 12px;
+        border: none;
+        @include borderRadius(10px);
+        
+        .select-btns{
+            margin-left: 20px;
+        }
+
+        .select-btn{
+            font-size: 11.6px;
+        }
+    }
+}
+
+// Styles mobile <= 400px
+@media screen and (max-width: 400px){
+    .buttons-container{
+        .select-btns{
+            margin-left: 0;
+        }
+    }
+}

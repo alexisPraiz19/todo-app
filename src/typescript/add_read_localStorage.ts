@@ -3,7 +3,7 @@ export let storageArray: {id: number, do: string, complete: boolean}[] = []; // 
 
 
 // Crear - obtener localStorage <inicio>
-export function createStorage():void{ localStorage.setItem("todo list", JSON.stringify(storageArray)); }
+export function createStorage(store:any):void{ localStorage.setItem("todo list", JSON.stringify(store)); }
 
 export function getStorage():any{
     const storage:string = localStorage.getItem("todo list")!;
@@ -22,12 +22,12 @@ export function getCountStorage():any{
 
 
 // Función para crear un Todo de la lista <inicio>
-export function createItem(id:number, todoText:string):string{
+export function createItem(id:number, todoText:string, complete?:boolean):string{
     return `
-    <li class="todo-item">
+    <li class="todo-item ${complete ? "todo-complete" : ""}">
         <span class="border-hover">
             <label for=${id} class="label-check"></label>
-            <input type="checkbox" name="check todo" id=${id} class="check-todo"/>
+            <input type="checkbox" name="check todo" id=${id} class="check-todo" ${complete ? "checked": ""}/>
             <img src="./assets/images/icon-check.svg" alt="icon check" class="icon-check"/>
         </span>
 
@@ -54,7 +54,7 @@ export async function addDefaultTodo():Promise<void>{
         todoList.innerHTML += createItem(detaultTodos[i].id, detaultTodos[i].do);
     }
 
-    createStorage();
+    createStorage(storageArray);
 }
 // <fin>
 
@@ -63,7 +63,7 @@ export function readStorage():any{
     const todoList:HTMLUListElement = document.querySelector(".todo-list")!;
     const storage = getStorage();
 
-    for(let i in storage){ todoList.innerHTML += createItem(storage[i].id, storage[i].do); }
+    for(let i in storage){ todoList.innerHTML += createItem(storage[i].id, storage[i].do, storage[i].complete); }
 }
 
 
@@ -76,19 +76,86 @@ export function addTodo(inputValue:string):void{
     todoList.innerHTML += createItem(storageId, inputValue);
 
     // Agregar To Do al localStorage
-    interface watchNewTodo {
+    interface WatchNewTodo {
         id: number;
         do: string;
         complete: false
     }
 
-    const newTodoLocal:watchNewTodo = {
+    const newTodoLocal:WatchNewTodo = {
         id: storageId,
         do: inputValue,
         complete: false
     }
     storageArray = getStorage();
     storageArray.push(newTodoLocal);
-    createStorage();
+    createStorage(storageArray);
 }
 // <fin>
+
+
+//
+interface WatchMarkerItem {
+    check:boolean;
+    generic: HTMLElement[],
+    id: number
+}
+
+function markerItemExtend({check, generic, id}:WatchMarkerItem):void{
+    let storageValues = getStorage();
+    let idMatch = storageValues.find((i:any) => i.id == id);
+
+    if(check){
+        generic[0].classList.add("todo-complete");
+
+        idMatch.complete = true;
+        createStorage(storageValues);
+    }else{
+        generic[0].classList.remove("todo-complete");
+
+        idMatch.complete = false;
+        createStorage(storageValues);
+    }
+}
+// 
+export function markerItem():void{
+    const todoList:HTMLUListElement = document.querySelector(".todo-list")!;
+
+    todoList.addEventListener("click",e=>{
+        // Marcar/Desmarcar tarea tarea completa tanto en el DOM como localStorage
+        const inputCheck = e.target as HTMLInputElement;
+        let itemList  = inputCheck.parentElement!.parentElement! as HTMLLIElement;
+        let iconCheck = itemList.firstElementChild!.lastElementChild! as HTMLImageElement;
+        let todoText  = itemList.lastElementChild!.firstElementChild! as HTMLLabelElement;
+        let id:number = parseInt(inputCheck.id);
+        
+        if(inputCheck.nodeName == "INPUT" && inputCheck.checked){
+            let params = {
+                check: true,
+                generic: [itemList, iconCheck, todoText],
+                id
+            }
+            markerItemExtend(params);
+        }
+        else if(inputCheck.nodeName == "INPUT" && !inputCheck.checked){
+            let params = {
+                check: false,
+                generic: [itemList, iconCheck, todoText],
+                id
+            }
+            markerItemExtend(params);
+        }
+
+        // Eliminar tarea con el icono Cruz
+        const iconCross = e.target as HTMLElement;
+        const childID   = itemList.firstElementChild!.children[1].id;
+        const removeID  = getStorage().findIndex((i:any) => i.id == childID);
+
+        if(iconCross.nodeName == "IMG" && iconCross.classList.contains("icon-cross")){
+            todoList.removeChild(itemList);
+            let storageValues = getStorage();
+            storageValues.splice(removeID, 1);
+            createStorage(storageValues);
+        }
+    });
+}

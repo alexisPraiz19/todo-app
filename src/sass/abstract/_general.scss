@@ -10,17 +10,22 @@
 // Dark theme
 :root{
     // neutral 
-    --title-todo: hsl(236, 33%, 92%);
+    --header-title: hsl(236, 33%, 92%);
     --placeholder: hsl(236, 9%, 61%);
+    --btn-add-todo: hsl(235, 19%, 35%);
+    --btn-add-todo-hover: hsl(233, 11%, 84%);
     --border-circle: hsl(233, 14%, 35%);
-    --border-bottom-item: hsl(235, 19%, 35%);
     --border-circle-hover: linear-gradient(hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+    --border-top-item: hsl(235, 19%, 35%);
+    --button-selected-active: hsl(220, 98%, 61%);
 
     // dark
     --bg-body: hsl(235, 21%, 11%);
     --bg-todo-container: hsl(235, 24%, 19%);
     --todo-text: hsl(236, 9%, 61%);
-    --completed-todo: hsl(233, 14%, 35%);
+    --todo-text-completed: hsl(233, 14%, 35%);
+    --buttons-select: hsl(233, 14%, 35%);
+    --buttons-select-hover: hsl(233, 11%, 84%);
 }
 
 body{

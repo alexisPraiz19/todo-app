@@ -14,7 +14,7 @@
         .title{ 
             text-transform: uppercase;
             letter-spacing: 10px;
-            color: var(--title-todo);
+            color: var(--header-title);
         }
 
         .switch-theme{
@@ -60,6 +60,19 @@
                 font-size: 14px;
                 letter-spacing: .5px;
                 color: var(--placeholder);
+            }
+        }
+
+        .btn-add_todo{
+            height: 100px;
+            padding-left: 10px;
+            background-color: transparent;
+            border: none;
+            color: var(--btn-add-todo);
+
+            &:hover{
+                color: var(--btn-add-todo-hover);
+                cursor: pointer;
             }
         }
     }

@@ -1,3 +1,4 @@
+import ButtonsOfSelect from "./ButtonsOfSelect";
 import Header from "./Header";
 import TodoList from "./TodoList";
 
@@ -6,6 +7,7 @@ export default function TodoContainer(): JSX.Element {
     <main className="main">
         <Header/>
         <TodoList/>
+        <ButtonsOfSelect/>
     </main>
   )
 }

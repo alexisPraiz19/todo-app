@@ -1,22 +1,29 @@
+// Styles dekstop <= 1440px
 .todo-list{
+    // Container styles
+    position: relative;
     width: 100%;
+    max-height: 350px;
+    overflow-x: hidden;
     margin-top: 20px;
     background-color: var(--bg-todo-container);
-    @include borderRadius(5px);
-
+    @include borderRadiusDisable(10px, 10px, 0, 0);
+    
+    // Container items styles
     .todo-item{
         width: 100%;
         height: 50px;
         padding: 0 20px;
         @include flex(10px);
         align-items: center;
-
+         
         &:not(:first-child){
-            border-top: 1px solid var(--border-bottom-item);
+            border-top: 1px solid var(--border-top-item);
         }
 
         &:hover > .border-hover{ background: var(--border-circle-hover); }
-
+        
+        // First child element container
         .border-hover{
             position: relative;
             width: 19px;
@@ -34,7 +41,6 @@
                 display: block;
                 width: calc(100% - 1px);
                 height: calc(100% - 1px);
-                
                 @include borderRadius(50%);
                 background-color: var(--bg-todo-container);
                 cursor: pointer;
@@ -57,7 +63,8 @@
                 @include borderRadius(50%);
             }
         }
-
+        
+        // Second child element container
         .container-text{
             width: 100%;
             height: 100%;
@@ -90,12 +97,30 @@
             } 
         }
     }
+    
+    // TS logic - Item complete styles
+    .todo-complete{
+        .border-hover{
+            .icon-check{ display: block; }
+        }
+
+        .container-text{
+            .todo-text{ 
+                color: var(--todo-text-completed);
+                text-decoration: line-through; 
+            }
+        }
+    }
 }
 
+
+// Styles mobiles <= 480px
 @media screen and (max-width: 480px){
     .todo-list{
+        @include borderRadius(10px);
         .todo-item{
             .container-text{
+                .todo-text{ font-size: 15px;}
                 .icon-cross{opacity: 1;}
             }
         }
