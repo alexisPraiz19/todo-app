@@ -1,18 +1,16 @@
-// Tools
-
-import { useEffect } from "react";
-import { markerItem } from "../../typescript/add_read_localStorage";
+// Contexts
 import { useContext } from "react";
-import { MyContext } from "../context/ItemsLeft";
+import { ItemsLeftContext } from "../context/ItemsLeft";
+import { Global } from "../context/GlobalContext";
 
+// TS logic
+import { markItem } from "../../typescript/mark_item";
 
 export default function TodoList() {
-  const soi = useContext(MyContext) as any;
-  useEffect(()=>{
-
-    markerItem(soi);
-  })
+  const itemsLeftContext   = useContext(ItemsLeftContext) as any;
+  const functionsOfContext = useContext(Global) as any;
+  
   return (
-    <ul className="todo-list"></ul>
+    <ul className="todo-list" onClick={(e)=> markItem(e, itemsLeftContext, functionsOfContext)}></ul>
   );
 };

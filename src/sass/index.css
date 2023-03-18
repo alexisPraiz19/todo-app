@@ -347,11 +347,11 @@ body.light .header .switch-theme {
   cursor: pointer;
 }
 
-.todo-list .todo-complete .border-hover .icon-check {
+.todo-list .todo-completed .border-hover .icon-check {
   display: block;
 }
 
-.todo-list .todo-complete .container-text .todo-text {
+.todo-list .todo-completed .container-text .todo-text {
   color: var(--todo-text-completed);
   text-decoration: line-through;
 }

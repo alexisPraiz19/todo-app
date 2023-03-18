@@ -1,28 +1,29 @@
-// Tools
-import { useEffect } from "react";
-import GlobalContext from "../pages/context/ItemsLeft";
+// Context
+import { useEffect, useContext } from "react";
+import { Global } from "../pages/context/GlobalContext";
 
 // TS logic
-import { addDefaultTodo, getStorage , readStorage} from "../typescript/add_read_localStorage";
-import { getCountStorage } from "../typescript/add_read_localStorage";
+import { addDefaultTodo, readStorage } from "../typescript/add_read_default";
 
 //Components
 import BgImage from "../pages/common/BgImage";
 import TodoContainer from "../pages/components/TodoContainer";
 
 function App() {
-  useEffect(()=>{
-    if(getStorage() == null) addDefaultTodo();
-    else readStorage();
+  const functionsOfContext = useContext(Global) as any;
 
-    if(getCountStorage() == null)  localStorage.setItem("countID", "6");
+  useEffect(()=>{
+    if(functionsOfContext.getStorage() == null) addDefaultTodo(functionsOfContext);
+    else readStorage(functionsOfContext);
+
+    if(functionsOfContext.getCountStorage() == null)  localStorage.setItem("countID", "6");
   });
 
   return (
-    <GlobalContext>
+    <>
       <BgImage/>
       <TodoContainer/>
-    </GlobalContext>
+    </>
   )
 }
 

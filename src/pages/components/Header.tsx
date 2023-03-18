@@ -1,17 +1,26 @@
-// Tools
-import { useEffect } from "react";
+// Contexts
+import { useEffect, useContext } from "react";
+import { Global } from "../context/GlobalContext";
+import { ItemsLeftContext } from "../context/ItemsLeft";
 
 // TS logic
 import { switchTheme } from "../../typescript/switchTheme";
-import { addTodo } from "../../typescript/add_read_localStorage";
+import { addItem } from "../../typescript/add_item_list";
+
 
 export default function Header() {
+  const functionsOfContext = useContext(Global) as {};
+  const itemsLeftContext   = useContext(ItemsLeftContext);
+  
+  function addTodo():void{
+    const inputTodo = document.getElementById('input-add_todo')! as HTMLInputElement;
+    const inputText = inputTodo.value;
+
+    if(inputText != "") addItem(inputText, functionsOfContext, itemsLeftContext); inputTodo.value = "";
+  }
+
   useEffect(()=>{
     switchTheme();
-    const inputTodo = (document.getElementById('input-add_todo') as HTMLInputElement)!;
-    const btnAddTodo:HTMLButtonElement = document.querySelector(".btn-add_todo")!;
-
-    btnAddTodo.addEventListener("click",()=>{ if(inputTodo.value != "") addTodo(inputTodo.value); inputTodo.value = ""})
   });
 
   return (
@@ -26,7 +35,7 @@ export default function Header() {
       <div className="container-add">
         <label htmlFor="input-add_todo" className="label-input_add"></label>
         <input type="text" name="add todo" id="input-add_todo" className="input-add_todo" placeholder="Create a new todo..."/>
-        <button className="btn-add_todo">Add</button>
+        <button className="btn-add_todo" onClick={() => addTodo()}>Add</button>
       </div>
     </header>
   );

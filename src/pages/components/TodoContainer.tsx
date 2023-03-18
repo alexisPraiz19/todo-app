@@ -1,3 +1,4 @@
+// Components
 import ButtonsOfSelect from "./ButtonsOfSelect";
 import Header from "./Header";
 import TodoList from "./TodoList";

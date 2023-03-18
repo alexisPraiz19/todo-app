@@ -20,7 +20,7 @@
         .switch-theme{
             width: 28px;
             height: 28px;
-            background-image: url("assets/images/icon-sun.svg");
+            background-image: url("./images/icon-sun.svg");
             background-size: 100%;
             cursor: pointer;
         }
@@ -82,7 +82,7 @@
 body.light{
     .header{
         .switch-theme{
-            background-image: url("assets/images/icon-moon.svg");
+            background-image: url("./images/icon-moon.svg");
         }
     }
 }

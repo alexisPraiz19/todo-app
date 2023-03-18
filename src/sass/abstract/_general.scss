@@ -41,7 +41,7 @@ body{
         top: 0;
         width: 100vw;
         height: 250px;
-        background-image: url("assets/images/bg-desktop-dark.jpg");
+        background-image: url("./images/bg-desktop-dark.jpg");
         background-size: 100%;
         background-attachment: fixed;
         background-repeat: no-repeat;
@@ -61,7 +61,7 @@ body.light{
     --bg-body: hsl(0, 0%, 98%);
 
     .bg-desktop{
-        background-image: url("assets/images/bg-desktop-light.jpg");
+        background-image: url("./images/bg-desktop-light.jpg");
     }
 }
 
@@ -69,11 +69,11 @@ body.light{
 @media screen and (max-width: 480px){
     // Dark theme mobile
     body{
-        .bg-desktop{ background-image: url("assets/images/bg-mobile-dark.jpg"); }
+        .bg-desktop{ background-image: url("./images/bg-mobile-dark.jpg"); }
     }
     
     // Light theme mobile
     body.light{
-        .bg-desktop{ background-image: url("assets/images/bg-desktop-light.jpg"); }
+        .bg-desktop{ background-image: url("./images/bg-mobile-light.jpg"); }
     }
 }

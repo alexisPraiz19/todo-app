@@ -1,20 +1,19 @@
 // Tools 
 import { useEffect, useState, useContext } from "react";
-import { MyContext } from "../context/ItemsLeft";
+import { ItemsLeftContext } from "../context/ItemsLeft";
+import { Global } from "../context/GlobalContext";
 
 // TS logic
-import { selectBtn, getStorage } from "../../typescript/add_read_localStorage";
+import { selectBtn } from "../../typescript/button_of_select";
 
 function ButtonsOfSelect() {
-  const [left, setLeft] = useState(5);
-
-  const example = useContext(MyContext) as any;
-
+  const {left} = useContext(ItemsLeftContext) as any;
+  const functionsOfContext = useContext(Global);
   
   return (
-    <div className="buttons-container" onClick={e=> selectBtn(e)}>
+    <div className="buttons-container" onClick={e=> selectBtn(e, functionsOfContext)}>
       <p className="items-left">
-        <span className="number-items_left">{example.com} </span> 
+        <span className="number-items_left">{left} </span> 
         items left
       </p>
 

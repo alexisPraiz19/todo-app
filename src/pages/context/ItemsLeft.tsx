@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-export const MyContext = React.createContext({});
-import { getStorage } from "../../typescript/add_read_localStorage";
+export const ItemsLeftContext = React.createContext({});
+import { Global } from "./GlobalContext";
+
 
 export default function ItemsLeft({children}:any): JSX.Element{
-    const completed = getStorage().filter((c:any) => c.complete == false);
-
-    const [com, setCom] = useState(completed.length);
-
+    const getStorage = ():[] => { return JSON.parse(localStorage.getItem("todo list")!); }
+    let   itemsIncomplete:any;
+    const [left, setLeft] = useState(6);
+    
+    useEffect(()=>{
+        if(getStorage() != null) { itemsIncomplete = getStorage().filter((i:any)=> i.complete == false); setLeft(itemsIncomplete.length) }
+    });
+    
     return (
-        <MyContext.Provider value={{com, setCom}}>
+        <ItemsLeftContext.Provider value={{left, setLeft}}>
             {children}
-        </MyContext.Provider>
+        </ItemsLeftContext.Provider>
     );
 };
