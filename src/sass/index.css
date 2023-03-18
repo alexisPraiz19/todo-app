@@ -1,0 +1,454 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:root {
+  --header-title: hsl(236, 33%, 92%);
+  --placeholder: hsl(236, 9%, 61%);
+  --btn-add-todo: hsl(235, 19%, 35%);
+  --btn-add-todo-hover: hsl(233, 11%, 84%);
+  --border-circle: hsl(233, 14%, 35%);
+  --border-circle-hover: linear-gradient(hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+  --border-top-item: hsl(235, 19%, 35%);
+  --button-selected-active: hsl(220, 98%, 61%);
+  --bg-body: hsl(235, 21%, 11%);
+  --bg-todo-container: hsl(235, 24%, 19%);
+  --todo-text: hsl(236, 9%, 61%);
+  --todo-text-completed: hsl(233, 14%, 35%);
+  --buttons-select: hsl(233, 14%, 35%);
+  --buttons-select-hover: hsl(233, 11%, 84%);
+}
+
+body {
+  position: relative;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: var(--bg-body);
+  transition: all 0.1s ease;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+}
+
+body .bg-desktop {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 250px;
+  background-image: url("assets/images/bg-desktop-dark.jpg");
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+body.light {
+  --bg-body: hsl(0, 0%, 98%);
+}
+
+body.light .bg-desktop {
+  background-image: url("assets/images/bg-desktop-light.jpg");
+}
+
+@media screen and (max-width: 480px) {
+  body .bg-desktop {
+    background-image: url("assets/images/bg-mobile-dark.jpg");
+  }
+  body.light .bg-desktop {
+    background-image: url("assets/images/bg-desktop-light.jpg");
+  }
+}
+
+.main {
+  width: 500px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 480px;
+}
+
+@media screen and (max-width: 480px) {
+  .main {
+    width: 90vw;
+  }
+}
+
+.header {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.header .top-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 35px;
+}
+
+.header .top-content .title {
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  color: var(--header-title);
+}
+
+.header .top-content .switch-theme {
+  width: 28px;
+  height: 28px;
+  background-image: url("assets/images/icon-sun.svg");
+  background-size: 100%;
+  cursor: pointer;
+}
+
+.header .container-add {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--bg-todo-container);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.header .container-add .label-input_add {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border-circle);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  cursor: pointer;
+}
+
+.header .container-add .input-add_todo {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14.5px;
+  color: var(--placeholder);
+  letter-spacing: .5px;
+}
+
+.header .container-add .input-add_todo::-webkit-input-placeholder {
+  font-family: "Josefin Sans";
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: var(--placeholder);
+}
+
+.header .container-add .input-add_todo:-ms-input-placeholder {
+  font-family: "Josefin Sans";
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: var(--placeholder);
+}
+
+.header .container-add .input-add_todo::-ms-input-placeholder {
+  font-family: "Josefin Sans";
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: var(--placeholder);
+}
+
+.header .container-add .input-add_todo::placeholder {
+  font-family: "Josefin Sans";
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: var(--placeholder);
+}
+
+.header .container-add .btn-add_todo {
+  height: 100px;
+  padding-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: var(--btn-add-todo);
+}
+
+.header .container-add .btn-add_todo:hover {
+  color: var(--btn-add-todo-hover);
+  cursor: pointer;
+}
+
+body.light .header .switch-theme {
+  background-image: url("assets/images/icon-moon.svg");
+}
+
+.todo-list {
+  position: relative;
+  width: 100%;
+  max-height: 350px;
+  overflow-x: hidden;
+  margin-top: 20px;
+  background-color: var(--bg-todo-container);
+  border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  -ms-border-radius: 10px 10px 0 0;
+  -o-border-radius: 10px 10px 0 0;
+}
+
+.todo-list .todo-item {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.todo-list .todo-item:not(:first-child) {
+  border-top: 1px solid var(--border-top-item);
+}
+
+.todo-list .todo-item:hover > .border-hover {
+  background: var(--border-circle-hover);
+}
+
+.todo-list .todo-item .border-hover {
+  position: relative;
+  width: 19px;
+  height: 19px;
+  min-width: 19px;
+  outline: 1px solid var(--border-circle);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.todo-list .todo-item .border-hover:hover {
+  background: var(--border-circle-hover);
+}
+
+.todo-list .todo-item .border-hover .label-check {
+  position: relative;
+  top: .5px;
+  left: .5px;
+  display: block;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: var(--bg-todo-container);
+  cursor: pointer;
+}
+
+.todo-list .todo-item .border-hover .check-todo {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.todo-list .todo-item .border-hover .icon-check {
+  position: absolute;
+  top: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  background: var(--border-circle-hover);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.todo-list .todo-item .container-text {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: var(--todo-text);
+}
+
+.todo-list .todo-item .container-text .todo-text {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.todo-list .todo-item .container-text .icon-cross {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  -webkit-transition: opacity 0.1s ease;
+  -moz-transition: opacity 0.1s ease;
+  -ms-transition: opacity 0.1s ease;
+  -o-transition: opacity 0.1s ease;
+}
+
+.todo-list .todo-item:hover .icon-cross {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.todo-list .todo-complete .border-hover .icon-check {
+  display: block;
+}
+
+.todo-list .todo-complete .container-text .todo-text {
+  color: var(--todo-text-completed);
+  text-decoration: line-through;
+}
+
+@media screen and (max-width: 480px) {
+  .todo-list {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+  .todo-list .todo-item .container-text .todo-text {
+    font-size: 15px;
+  }
+  .todo-list .todo-item .container-text .icon-cross {
+    opacity: 1;
+  }
+}
+
+.buttons-container {
+  position: absolute;
+  width: 500px;
+  height: 40px;
+  padding: 0 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--bg-todo-container);
+  color: var(--buttons-select);
+  font-size: 13px;
+  border-radius: 0 0 10px 10px;
+  -webkit-border-radius: 0 0 10px 10px;
+  -moz-border-radius: 0 0 10px 10px;
+  -ms-border-radius: 0 0 10px 10px;
+  -o-border-radius: 0 0 10px 10px;
+  border-top: 1px solid var(--border-top-item);
+}
+
+.buttons-container .select-btns {
+  margin-left: 30px;
+}
+
+.buttons-container .select-btns .select-btn {
+  font-weight: 700;
+  padding: 0 5px;
+  letter-spacing: .5px;
+}
+
+.buttons-container .select-btn {
+  color: var(--buttons-select);
+  background-color: transparent;
+  border: none;
+  font-family: "Josefin Sans";
+  font-size: 13px;
+}
+
+.buttons-container .select-btn:hover {
+  cursor: pointer;
+  color: var(--buttons-select-hover);
+}
+
+.buttons-container .selected {
+  color: var(--button-selected-active);
+}
+
+@media screen and (max-width: 480px) {
+  .buttons-container {
+    width: 90vw;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 12px;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+  .buttons-container .select-btns {
+    margin-left: 20px;
+  }
+  .buttons-container .select-btn {
+    font-size: 11.6px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .buttons-container .select-btns {
+    margin-left: 0;
+  }
+}
+/*# sourceMappingURL=index.css.map */

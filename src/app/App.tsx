@@ -1,5 +1,6 @@
 // Tools
 import { useEffect } from "react";
+import GlobalContext from "../pages/context/ItemsLeft";
 
 // TS logic
 import { addDefaultTodo, getStorage , readStorage} from "../typescript/add_read_localStorage";
@@ -18,10 +19,10 @@ function App() {
   });
 
   return (
-    <>
+    <GlobalContext>
       <BgImage/>
       <TodoContainer/>
-    </>
+    </GlobalContext>
   )
 }
 

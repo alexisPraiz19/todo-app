@@ -1,0 +1,14 @@
+.main {
+  width: 500px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 480px;
+}
+
+@media screen and (max-width: 480px) {
+  .main {
+    width: 90vw;
+  }
+}
+/*# sourceMappingURL=main.css.map */

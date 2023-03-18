@@ -20,11 +20,10 @@ export function getCountStorage():any{
 }
 // <fin>
 
-
 // Función para crear un Todo de la lista <inicio>
 export function createItem(id:number, todoText:string, complete?:boolean):string{
     return `
-    <li class="todo-item ${complete ? "todo-complete" : ""}">
+    <li class="todo-item ${complete ? "todo-completed" : ""}">
         <span class="border-hover">
             <label for=${id} class="label-check"></label>
             <input type="checkbox" name="check todo" id=${id} class="check-todo" ${complete ? "checked": ""}/>
@@ -98,27 +97,34 @@ export function addTodo(inputValue:string):void{
 interface WatchMarkerItem {
     check:boolean;
     generic: HTMLElement[],
-    id: number
+    id: number,
+    soi: any;
 }
 
-function markerItemExtend({check, generic, id}:WatchMarkerItem):void{
+
+
+function markerItemExtend({check, generic, id, soi}:WatchMarkerItem):void{
     let storageValues = getStorage();
     let idMatch = storageValues.find((i:any) => i.id == id);
 
     if(check){
-        generic[0].classList.add("todo-complete");
+        generic[0].classList.add("todo-completed");
 
         idMatch.complete = true;
         createStorage(storageValues);
+        const storageLeft = storageValues.filter((todo:any) => todo.complete == false);
+        soi.setCom(storageLeft.length)
     }else{
-        generic[0].classList.remove("todo-complete");
+        generic[0].classList.remove("todo-completed");
 
         idMatch.complete = false;
         createStorage(storageValues);
+        const storageLeft = storageValues.filter((todo:any) => todo.complete == false);
+        soi.setCom(storageLeft.length)
     }
 }
 // 
-export function markerItem():void{
+export function markerItem(soi:any):void{
     const todoList:HTMLUListElement = document.querySelector(".todo-list")!;
 
     todoList.addEventListener("click",e=>{
@@ -133,7 +139,8 @@ export function markerItem():void{
             let params = {
                 check: true,
                 generic: [itemList, iconCheck, todoText],
-                id
+                id,
+                soi
             }
             markerItemExtend(params);
         }
@@ -141,7 +148,8 @@ export function markerItem():void{
             let params = {
                 check: false,
                 generic: [itemList, iconCheck, todoText],
-                id
+                id,
+                soi
             }
             markerItemExtend(params);
         }
@@ -158,4 +166,49 @@ export function markerItem():void{
             createStorage(storageValues);
         }
     });
+}
+
+
+// Botones de selección 
+    function selectBtnExtend(items:NodeListOf<HTMLLIElement>, button:string): void{
+        items.forEach(item =>{
+          let classList = item.classList;
+          if(button == "active" && classList.contains("todo-completed")) item["style"].display = "none";
+          else if(button == "completed" && !classList.contains("todo-completed")) item["style"].display = "none";
+          else if(button == "all") item["style"].display = "flex";
+          else item["style"].display = "flex";
+        });
+    }
+
+    function markerSelected(btns:NodeListOf<HTMLButtonElement>, target:HTMLElement): void{
+        target.classList.add("selected");
+        btns.forEach(btn =>{
+            if(btn.classList.contains("selected") && btn.id != target.id) btn.classList.remove("selected");
+        });
+    }
+
+    function clearCompleted(): void{
+        const todoList: HTMLUListElement = document.querySelector(".todo-list")!;
+        const completedTodoDOM: Element[] = [... document.querySelectorAll(".todo-completed")];
+        let completedStorage = getStorage().filter((todo:any) => todo.complete == true);
+        let newStorageValue = getStorage();
+            
+        for(let i in completedStorage){
+            const index = newStorageValue.findIndex((index:any) => index.id == completedStorage[i].id);
+            newStorageValue.splice(index, 1);
+        }
+        createStorage(newStorageValue);
+        
+        for(let i in completedTodoDOM) todoList.removeChild(completedTodoDOM[i])
+    }
+
+export function selectBtn(e:any):void {
+    const target = e.target as HTMLElement;
+    const items  = document.querySelectorAll(".todo-item") as NodeListOf<HTMLLIElement>;
+    const btn = document.querySelectorAll(".select-btn") as NodeListOf<HTMLButtonElement>;
+
+    if(target.nodeName == "BUTTON" && target.id == "active") selectBtnExtend(items, "active"); markerSelected(btn, target);  
+    if(target.nodeName == "BUTTON" && target.id == "completed") selectBtnExtend(items, "completed");  markerSelected(btn, target);
+    if(target.nodeName == "BUTTON" && target.id == "all") selectBtnExtend(items, "all");  markerSelected(btn, target);
+    if(target.nodeName == "BUTTON" && target.id == "clear-completed") clearCompleted();
 }
