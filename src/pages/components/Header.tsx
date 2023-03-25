@@ -1,5 +1,5 @@
 // Contexts
-import { useEffect, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Global } from "../context/GlobalContext";
 import { ItemsLeftContext } from "../context/ItemsLeft";
 
@@ -19,16 +19,14 @@ export default function Header() {
     if(inputText != "") addItem(inputText, functionsOfContext, itemsLeftContext); inputTodo.value = "";
   }
 
-  useEffect(()=>{
-    switchTheme();
-  });
+  useEffect(()=> switchTheme());
 
   return (
     <header className="header">
       {/* light-dark */}
       <div className="top-content">
         <h1 className="title">todo</h1>
-        <div className="switch-theme" title="light-dark"></div>
+        <div className="switch-theme" title="light-dark_theme"></div>
       </div>
 
       {/* add todo */}

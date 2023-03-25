@@ -1,7 +1,7 @@
 // Dark - Light function
 export function switchTheme():void{
-    const divSwitch:HTMLDivElement = document.querySelector(".switch-theme")!;
-    const body:HTMLElement = document.getElementById("body")!;
+    const target = document.querySelector(".switch-theme") as HTMLDivElement;
+    const body = document.getElementById("body") as HTMLBodyElement;
 
-    divSwitch.addEventListener("click",e => body.classList.toggle("light"));
+    target.addEventListener("click",() =>{ body.classList.toggle("light"); });
 }

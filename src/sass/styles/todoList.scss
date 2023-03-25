@@ -1,128 +1,144 @@
 // Styles dekstop <= 1440px
-.todo-list{
-    // Container styles
-    position: relative;
+.todo-list {
+  // Container styles
+  position: relative;
+  width: 100%;
+  max-height: 350px;
+  overflow-x: hidden;
+  margin-top: 20px;
+  background-color: var(--bg-todo-container);
+  @include borderRadiusDisable(10px, 10px, 0, 0);
+  -webkit-box-shadow: 0px 50px 39px -21px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 50px 39px -21px rgba(0, 0, 0, 0.75);
+  // Container items styles
+  .todo-item {
     width: 100%;
-    max-height: 350px;
-    overflow-x: hidden;
-    margin-top: 20px;
-    background-color: var(--bg-todo-container);
-    @include borderRadiusDisable(10px, 10px, 0, 0);
-    
-    // Container items styles
-    .todo-item{
+    height: 50px;
+    padding: 0 20px;
+    @include flex(10px);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &:not(:first-child) { border-top: 1px solid var(--border-top-item); }
+
+    &:hover > .border-hover { background: var(--border-circle-hover); }
+
+    // First child element container
+    .border-hover {
+      position: relative;
+      width: 19px;
+      height: 19px;
+      min-width: 19px;
+      outline: 1px solid var(--border-circle);
+      @include borderRadius(50%);
+
+      &:hover {
+        background: var(--border-circle-hover);
+      }
+
+      .label-check {
+        position: relative;
+        top: 0.5px;
+        left: 0.5px;
+        display: block;
+        width: calc(100% - 1px);
+        height: calc(100% - 1px);
+        @include borderRadius(50%);
+        background-color: var(--bg-todo-container);
+        cursor: pointer;
+      }
+
+      .check-todo {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .icon-check {
+        position: absolute;
+        top: 0;
+        display: none;
         width: 100%;
-        height: 50px;
-        padding: 0 20px;
-        @include flex(10px);
+        height: 100%;
+        padding: 5px;
+        background: var(--border-circle-hover);
+        @include borderRadius(50%);
+      }
+    }
+
+    // Second child element container
+    .container-text {
+      width: 100%;
+      height: 100%;
+      @include flex(5px);
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      color: var(--todo-text);
+
+      .todo-text {
+        width: 100%;
+        height: 100%;
+        @include flex(0);
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
-         
-        &:not(:first-child){
-            border-top: 1px solid var(--border-top-item);
-        }
+        font-size: 17px;
+        cursor: pointer;
+      }
 
-        &:hover > .border-hover{ background: var(--border-circle-hover); }
-        
-        // First child element container
-        .border-hover{
-            position: relative;
-            width: 19px;
-            height: 19px;
-            min-width: 19px;
-            outline: 1px solid var(--border-circle);
-            @include borderRadius(50%);
-
-            &:hover{ background: var(--border-circle-hover); }
-
-            .label-check{
-                position: relative;
-                top: .5px;
-                left: .5px;
-                display: block;
-                width: calc(100% - 1px);
-                height: calc(100% - 1px);
-                @include borderRadius(50%);
-                background-color: var(--bg-todo-container);
-                cursor: pointer;
-            }
-
-            .check-todo{
-                position: absolute;
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            .icon-check{
-                position: absolute;
-                top: 0;
-                display: none;
-                width: 100%;
-                height: 100%;
-                padding: 5px;
-                background: var(--border-circle-hover);
-                @include borderRadius(50%);
-            }
-        }
-        
-        // Second child element container
-        .container-text{
-            width: 100%;
-            height: 100%;
-            @include flex(5px);
-            justify-content: space-between;
-            align-items: center;
-            color: var(--todo-text);
-            
-            .todo-text{
-                width: 100%;
-                height: 100%;
-                @include flex(0);
-                align-items: center;
-                font-size: 17px;
-                cursor: pointer;
-            }
-
-            .icon-cross{
-                width: 14px;
-                height: 14px;
-                opacity: 0;
-                @include easeTransition(opacity, .1s, ease);
-            }
-        }
-
-        &:hover{ 
-            .icon-cross{
-                opacity: 1;
-                cursor: pointer;
-            } 
-        }
+      .icon-cross {
+        width: 15px;
+        height: 16px;
+        opacity: 0;
+        @include easeTransition(opacity, 0.1s, ease);
+      }
     }
-    
-    // TS logic - Item complete styles
-    .todo-completed{
-        .border-hover{
-            .icon-check{ display: block; }
-        }
 
-        .container-text{
-            .todo-text{ 
-                color: var(--todo-text-completed);
-                text-decoration: line-through; 
-            }
-        }
+    &:hover {
+      .icon-cross {
+        opacity: 1;
+        cursor: pointer;
+      }
     }
+  }
+
+  // TS logic - Item complete styles
+  .todo-completed {
+    .border-hover {
+      .icon-check {
+        display: block;
+      }
+    }
+
+    .container-text {
+      .todo-text {
+        color: var(--todo-text-completed);
+        text-decoration: line-through;
+      }
+    }
+  }
 }
 
-
 // Styles mobiles <= 480px
-@media screen and (max-width: 480px){
-    .todo-list{
-        @include borderRadius(10px);
-        .todo-item{
-            .container-text{
-                .todo-text{ font-size: 15px;}
-                .icon-cross{opacity: 1;}
-            }
+@media screen and (max-width: 480px) {
+  .todo-list {
+    @include borderRadius(10px);
+    -webkit-box-shadow: 0px 20px 30px -21px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 20px 30px -21px rgba(0, 0, 0, 0.75);
+    .todo-item {
+      .container-text {
+        .todo-text {
+          font-size: 15px;
         }
+        .icon-cross {
+          opacity: 1;
+        }
+      }
     }
+  }
 }

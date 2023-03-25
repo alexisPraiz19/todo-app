@@ -50,12 +50,11 @@
         border: none;
         @include borderRadius(10px);
         
-        .select-btns{
-            margin-left: 20px;
-        }
+        .select-btns{  margin-left: 20px; }
 
         .select-btn{
             font-size: 11.6px;
+            &:hover{ color: hsl(220, 98%, 61%); } 
         }
     }
 }
